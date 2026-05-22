@@ -21,18 +21,33 @@ Hosted under [`assets/`](./assets):
 
 | File | Use |
 |---|---|
-| `favicon-32.png` | Browser tab favicon (used by `setFaviconUrl` in the platform) |
-| `favicon-192.png` | High-DPI / PWA icon |
-| `opsdeck-logo.svg` | Full logo mark, light backgrounds |
-| `opsdeck-logo-dark.svg` | Full logo mark, dark backgrounds (cream variant) |
+| `favicon.svg` | Simplified mark (ring + disc + D, no chevrons or shadows). Source for the PNGs below. |
+| `favicon-32.png` | Browser tab favicon (used by `setFaviconUrl` in the platform). Rendered from `favicon.svg`. |
+| `favicon-192.png` | High-DPI / PWA icon. Rendered from `favicon.svg`. |
+| `opsdeck-logo.svg` | Full logo mark with chevrons + drop shadow, light backgrounds. |
+| `opsdeck-logo-dark.svg` | Full logo mark, dark backgrounds (cream variant). |
+
+**Favicon vs logo.** The favicon drops the chevrons and shadows because they
+turn into noise at 16–32px tab sizes. The full mark is used for in-product
+chrome, marketing imagery, and anywhere there's room for the chevron rank
+detail to read.
 
 Stable raw URLs:
 
 ```
 https://raw.githubusercontent.com/CherrelleTucker/opsdeck-feedback/main/assets/favicon-32.png
 https://raw.githubusercontent.com/CherrelleTucker/opsdeck-feedback/main/assets/favicon-192.png
+https://raw.githubusercontent.com/CherrelleTucker/opsdeck-feedback/main/assets/favicon.svg
 https://raw.githubusercontent.com/CherrelleTucker/opsdeck-feedback/main/assets/opsdeck-logo.svg
 https://raw.githubusercontent.com/CherrelleTucker/opsdeck-feedback/main/assets/opsdeck-logo-dark.svg
+```
+
+**Regenerating the favicon PNGs** (when the mark changes):
+
+```sh
+qlmanage -t -s 256 -o /tmp assets/favicon.svg
+sips -Z 32  /tmp/favicon.svg.png --out assets/favicon-32.png
+sips -Z 192 /tmp/favicon.svg.png --out assets/favicon-192.png
 ```
 
 ## About OpsDeck
