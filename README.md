@@ -45,10 +45,14 @@ https://raw.githubusercontent.com/CherrelleTucker/opsdeck-feedback/main/assets/o
 **Regenerating the favicon PNGs** (when the mark changes):
 
 ```sh
-qlmanage -t -s 256 -o /tmp assets/favicon.svg
-sips -Z 32  /tmp/favicon.svg.png --out assets/favicon-32.png
-sips -Z 192 /tmp/favicon.svg.png --out assets/favicon-192.png
+npx --yes svgexport assets/favicon.svg assets/favicon-32.png  32:32
+npx --yes svgexport assets/favicon.svg assets/favicon-192.png 192:192
 ```
+
+(Do not use macOS `qlmanage` for this — its thumbnail mode composites the
+SVG onto a white background, which shows up as a white square behind the
+mark in dark-mode browser tabs. `svgexport` uses headless Chromium and
+preserves the SVG's transparent background.)
 
 ## About OpsDeck
 
